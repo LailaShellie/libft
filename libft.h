@@ -85,6 +85,8 @@ int					ft_tolower(int c);
 void				*ft_memalloc(size_t size);
 int					ft_sqrt(int nb);
 char				*ft_strstr_kmp(const char *haystack, const char *needle);
-unsigned int		*z_func(const char *str);
+unsigned int		*ft_zfunc(const char *str);
+void				ft_free_mas(unsigned int ***mas, unsigned int size);
+int					ft_is_prime(int nb);
 
 #endif

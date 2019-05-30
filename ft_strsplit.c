@@ -18,7 +18,7 @@ static unsigned int	ft_count_words(const char *s, int c)
 	int end_of_line;
 	int end_of_word;
 
-	while (1)
+	while (*s)
 	{
 		if (*s == 0)
 			return (0);
@@ -47,6 +47,18 @@ static unsigned int	ft_wrdlen(const char *s, int c)
 	return (len);
 }
 
+static char			**ft_free_str(char **str)
+{
+	while (*str)
+	{
+		free(*str);
+		++*str;
+	}
+	free(str);
+	str = 0;
+	return (0);
+}
+
 static char			**ft_alloc(char const *s, char c)
 {
 	unsigned int	wrd_num;
@@ -66,7 +78,7 @@ static char			**ft_alloc(char const *s, char c)
 			++str_i;
 		if (!(str[wrd_i] = (char *)malloc(sizeof(str[wrd_i])
 						* (ft_wrdlen(s + str_i, c) + 1))))
-			return (0);
+			return (ft_free_str(str));
 		sym_i = 0;
 		while (s[str_i] != c && s[str_i] != 0)
 			str[wrd_i][sym_i++] = s[str_i++];

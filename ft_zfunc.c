@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_zfunc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 19:44:25 by lshellie          #+#    #+#             */
-/*   Updated: 2019/04/12 15:06:21 by lshellie         ###   ########.fr       */
+/*   Created: 2019/05/30 14:13:32 by lshellie          #+#    #+#             */
+/*   Updated: 2019/05/30 14:13:33 by lshellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+unsigned int		*ft_zfunc(const char *str)
 {
-	unsigned char *ddst;
-	unsigned char *ssrc;
+	unsigned int	*z;
+	unsigned int	i;
+	unsigned int	j;
 
-	ddst = (unsigned char *)dst;
-	ssrc = (unsigned char *)src;
-	if (ddst == 0 && ssrc == 0)
+	if (!(z = (unsigned int *)ft_memalloc(sizeof(int) * ft_strlen(str))))
 		return (0);
-	while (n--)
+	z[0] = 0;
+	i = 1;
+	j = 0;
+	while (str[i])
 	{
-		*ddst = *ssrc;
-		++ddst;
-		++ssrc;
+		if (str[i] != str[j] && j == 0)
+			z[i] = 0;
+		else if (str[i] != str[j] && j != 0)
+			j = z[j - 1];
+		if (str[i] == str[j])
+			z[i] = ++j;
+		++i;
 	}
-	return (dst);
+	return (z);
 }
