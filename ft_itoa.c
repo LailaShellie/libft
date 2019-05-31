@@ -62,7 +62,7 @@ char			*ft_itoa(int n)
 
 	nbr = n;
 	a = 0;
-	if (!(str = (char *)ft_memalloc(sizeof(*str) + (ft_count(n)))))
+	if (!(str = (char *)ft_memalloc(sizeof(*str) * (ft_count(n) + 1))))
 		return (0);
 	if (n == 0)
 		str[0] = '0';

@@ -15,22 +15,17 @@
 char	*ft_strchr(const char *s, int c)
 {
 	char	sym;
-	char	*ptr;
 	int		i;
 
 	i = 0;
-	ptr = 0;
 	sym = c;
-	while (1)
+	while (s[i])
 	{
 		if (s[i] == sym)
-		{
-			ptr = (char *)(&s[i]);
-			return (ptr);
-		}
-		if (s[i] == '\0' && sym != 0)
-			return (0);
+			return ((char *)(&s[i]));
 		++i;
 	}
-	return (ptr);
+	if (c == 0)
+		return ((char *)(&s[i]));
+	return (0);
 }

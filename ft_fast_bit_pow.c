@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_mas.c                                         :+:      :+:    :+:   */
+/*   ft_fast_bin_pow.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/30 14:31:51 by lshellie          #+#    #+#             */
-/*   Updated: 2019/05/30 14:31:52 by lshellie         ###   ########.fr       */
+/*   Created: 2019/05/31 12:56:13 by lshellie          #+#    #+#             */
+/*   Updated: 2019/05/31 12:56:17 by lshellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../.Trash/libft_git/libft.h"
-#include <stdlib.h>
+#include "libft.h"
 
-void	ft_free_mas(unsigned int ***mas, unsigned int size)
+unsigned long int	ft_fast_bit_pow(unsigned long int a,
+		unsigned long int b)
 {
-	unsigned int	i;
+	unsigned long int	i;
+	unsigned long int	res;
 
-	i = 0;
-	while (i < size)
+	res = 1;
+	i = 31;
+	while (i)
 	{
-		free(*mas);
-		++i;
+		if (b & 1 << i)
+			res *= a;
+		res *= res;
+		--i;
 	}
-	free(*mas);
-	*mas = 0;
+	if (b & 1)
+		res *= a;
+	return (res);
 }

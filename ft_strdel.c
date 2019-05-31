@@ -16,7 +16,5 @@
 void	ft_strdel(char **as)
 {
 	if (as != 0 && *as != 0)
-	{
 		ft_memdel((void **)as);
-	}
 }

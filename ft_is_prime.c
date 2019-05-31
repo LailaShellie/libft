@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../.Trash/libft_git/libft.h"
+#include "libft.h"
 
 static int	sqrt(int nb)
 {

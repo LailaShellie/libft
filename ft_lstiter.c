@@ -16,10 +16,13 @@ void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
 	t_list *cur;
 
-	cur = lst;
-	if (cur != 0)
+	if (f)
 	{
-		f(cur);
-		ft_lstiter(cur->next, f);
+		cur = lst;
+		if (cur != 0)
+		{
+			f(cur);
+			ft_lstiter(cur->next, f);
+		}
 	}
 }

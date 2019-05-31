@@ -19,7 +19,7 @@ char	*ft_strnew(size_t size)
 	char	*str;
 
 	str = 0;
-	if (!(str = (char *)ft_memalloc(sizeof(*str) * size + 1)))
+	if (!(str = (char *)ft_memalloc(sizeof(*str) * (size + 1))))
 		return (0);
 	return (str);
 }

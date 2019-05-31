@@ -32,7 +32,7 @@ char	*ft_strtrim(char const *s)
 				|| s[end] == '\t' || s[end] == '\n' || s[end] == 0))
 		end--;
 	i = end - start;
-	if (!(str = (char *)malloc(sizeof(*s) * i + 2)))
+	if (!(str = (char *)malloc(sizeof(*s) * (i + 1))))
 		return (0);
 	i = 0;
 	while (s[i] != 0 && start <= end)

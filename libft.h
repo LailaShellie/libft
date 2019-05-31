@@ -86,7 +86,11 @@ void				*ft_memalloc(size_t size);
 int					ft_sqrt(int nb);
 char				*ft_strstr_kmp(const char *haystack, const char *needle);
 unsigned int		*ft_zfunc(const char *str);
-void				ft_free_mas(unsigned int ***mas, unsigned int size);
 int					ft_is_prime(int nb);
+int					ft_gcd(int a, int b);
+unsigned long int	ft_fast_bin_pow(unsigned long int a,
+		unsigned long int b);
+unsigned long int	ft_fast_bit_pow(unsigned long int a,
+		unsigned long int b);
 
 #endif

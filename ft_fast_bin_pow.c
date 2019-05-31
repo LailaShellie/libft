@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_fast_pow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lshellie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/16 22:26:20 by lshellie          #+#    #+#             */
-/*   Updated: 2019/04/19 20:52:30 by lshellie         ###   ########.fr       */
+/*   Created: 2019/05/31 12:33:02 by lshellie          #+#    #+#             */
+/*   Updated: 2019/05/31 12:33:05 by lshellie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
+#include <stdio.h>
 
-void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
+unsigned long int	ft_fast_bin_pow(unsigned long int a,
+		unsigned long int b)
 {
-	t_list *list;
+	unsigned long int res;
 
-	if (alst && del)
+	res = 1;
+	while (b)
 	{
-		list = *alst;
-		del(list->content, list->content_size);
-		list->next = 0;
-		free(*alst);
-		*alst = 0;
+		if (b & 1)
+			res *= a;
+		a *= a;
+		b >>= 1;
 	}
+	return (res);
 }
