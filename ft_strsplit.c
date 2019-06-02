@@ -52,7 +52,7 @@ static char			**ft_free_str(char **str)
 	while (*str)
 	{
 		free(*str);
-		++*str;
+		++str;
 	}
 	free(str);
 	str = 0;

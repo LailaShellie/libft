@@ -6,7 +6,7 @@
 #    By: lshellie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/11 19:27:10 by lshellie          #+#    #+#              #
-#    Updated: 2019/04/20 16:12:04 by lshellie         ###   ########.fr        #
+#    Updated: 2019/06/02 13:17:36 by lshellie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,12 @@ HFILE = libft.h
 
 all: $(NAME)
 
-$(NAME):
-	gcc -Wall -Werror -Wextra -I $(HFILE) -c $(CFILE)
+$(NAME): $(OFILE)
 	ar rc $(NAME) $(OFILE)
 	ranlib $(NAME)
+
+%.o: %.c $(HFILE)
+	gcc -Wall -Werror -Wextra -I $(HFILE) -c $< -o $@
 
 clean: 
 	/bin/rm -f $(OFILE)
