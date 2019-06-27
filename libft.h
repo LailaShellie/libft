@@ -92,5 +92,6 @@ unsigned long int	ft_fast_bin_pow(unsigned long int a,
 		unsigned long int b);
 unsigned long int	ft_fast_bit_pow(unsigned long int a,
 		unsigned long int b);
+double				ft_sin(double alpha);
 
 #endif

@@ -1,122 +1,92 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
+#include "libft.h"
 
-double ft_fast_bin_pow(double a, int b)
+double		u_to_x(double u, double a, double b)
 {
-	double res;
+	return (u * (b - a) / 2 + (a + b) / 2);
+}
 
-	res = 1;
-	while (b)
+double		x_to_u(double x, double a, double b)
+{
+	return ((2 * x - a - b) / (b - a));
+}
+
+double		Tn(double u, int n)
+{
+	if (n == 0)
+		return (1);
+	else if (n == 1)
+		return (u);
+	return (2 * u * Tn(u, n - 1) - Tn(u, n - 2));
+}
+
+double		f_x(double x, double *c, double a, double b, int n)
+{
+	int i = 0;
+	double res = 0;
+
+	while (i < n)
 	{
-		if (b & 1)
-			res *= a;
-		a *= a;
-		b >>= 1;
+		res += c[i] * Tn(x_to_u(x, a, b), i);
+		++i;
 	}
 	return (res);
 }
 
-double T0(double u)
+void		get_nodes(int n, double *u)
 {
-	return (1);
-}
-double T1(double u)
-{
-	return (u);
-}
-double T2(double u)
-{
-	return (2 * u * u - 1);
-}
-double T3(double u)
-{
-	return (4 * ft_fast_bin_pow(u, 3) - 3.0 * u);
-}
-double T4(double u)
-{
-	return (8.0 * ft_fast_bin_pow(u, 4) - 8.0 * u * u + 1.0);
-}
-double T5(double u)
-{
-	return (16.0 * ft_fast_bin_pow(u, 5) - 20.0 * ft_fast_bin_pow(u, 3) + 5.0 * u);
+	int i;
+
+	i = 0;
+	while (i < n)
+	{
+		u[i] = cos((2 * (i + 1) - 1) * 3.14159265 / (2 * n));
+		++i;
+	}
 }
 
-
-
-int main()
+int			main()
 {
 	int i = 0;
+	int j;
 	double a = -0.5;
 	double b = 0.5;
-	double x[6];
-	double u[6] = {0.96592582628, 0.70710678118, 0.2588190451, -0.2588190451, -0.70710678118, -0.96592582628};
-	double y[6];
-	double c0 = 0;
-	double c1 = 0;
-	double c2 = 0;
-	double c3 = 0;
-	double c4 = 0;
-	double c5 = 0;
+	int n = 8;
+	double y[n];
+	double c[n];
+	double u[n];
 
-	while (i < 6)
+	get_nodes(n, u);
+	i = 0;
+	while (i < n)
 	{
-		x[i] = (b - a) / 2 * u[i] + (a + b) / 2;
+		y[i] = sin(3.14159265 * u_to_x(u[i], a, b));
 		++i;
 	}
 	i = 0;
-	while (i < 6)
+	while (i < n)
 	{
-		y[i] = sin(3.14159265 * x[i]);
+		j = 0;
+		while (j < n)
+		{
+			c[i] += Tn(u[j], i) * y[j];
+			++j;
+		}
+		if (!i)
+			c[i] = c[i] / n;
+		else
+			c[i] = 2 * c[i] / n;
 		++i;
 	}
-	i = 0;
-	while (i < 6)
-	{
-		c0 += y[i];
-		++i;
-	}
-	c0 = 2 * c0 / 6;
-	while (i < 6)
-	{
-		c0 += T0(u[i]) * y[i];
-		++i;
-	}
-	c0 = 2 * c0 / 6;
-	i = 0;
-	while (i < 6)
-	{
-		c1 += T1(u[i]) * y[i];
-		++i;
-	}
-	i = 0;
-	c1 = 2 * c1 / 6;
-	while (i < 6)
-	{
-		c2 += T2(u[i]) * y[i];
-		++i;
-	}
-	i = 0;
-	c2 = 2 * c2 / 6;
-	while (i < 6)
-	{
-		c3 += T3(u[i]) * y[i];
-		++i;
-	}
-	i = 0;
-	c3 = 2 * c3 / 6;
-	while (i < 6)
-	{
-		c4 += T4(u[i]) * y[i];
-		++i;
-	}
-	i = 0;
-	c4 = 2 * c4 / 6;
-	while (i < 6)
-	{
-		c5 += T5(u[i]) * y[i];
-		++i;
-	}
-	c5 = 2 * c5 / 6;
-	printf("%.10lf\n%.10lf\n%.10lf\n%.10lf\n%.10lf\n%.10lf\n", c0, c1, c2 , c3, c4, c5);
+//	i = 0;
+//	while (i < n)
+//	{
+//		printf("%.20lf\n", c[i]);
+//		++i;
+//	}
+	double x = 90;
+	printf("sin(%.2lf) = %lf\n", x, ft_sin(x));
 	return (0);
 }
